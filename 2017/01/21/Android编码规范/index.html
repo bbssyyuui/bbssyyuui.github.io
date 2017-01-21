@@ -1,0 +1,1150 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, Android" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="Android 编码规范
+任何一个傻瓜都能写出计算机可以理解的代码。唯有写出人类容易理解的代码，才是优秀的程序员。     – Martin Flower
+
+团队协作项目，为了保持大家的代码一致性，进行一些代码格式的规范。
+1. 基本要求
+代码缩进使用4个空格，不是Tab键。
+统一使用UTF-8编码，避免乱码问题。
+除了注释，代码中不出现中文。
+每个类写上必要的注释，类的说明，作者，修改时间，联系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android 编码规范">
+<meta property="og:url" content="http://yoursite.com/2017/01/21/Android编码规范/index.html">
+<meta property="og:site_name" content="Android背锅侠">
+<meta property="og:description" content="Android 编码规范
+任何一个傻瓜都能写出计算机可以理解的代码。唯有写出人类容易理解的代码，才是优秀的程序员。     – Martin Flower
+
+团队协作项目，为了保持大家的代码一致性，进行一些代码格式的规范。
+1. 基本要求
+代码缩进使用4个空格，不是Tab键。
+统一使用UTF-8编码，避免乱码问题。
+除了注释，代码中不出现中文。
+每个类写上必要的注释，类的说明，作者，修改时间，联系">
+<meta property="og:updated_time" content="2017-01-21T09:08:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android 编码规范">
+<meta name="twitter:description" content="Android 编码规范
+任何一个傻瓜都能写出计算机可以理解的代码。唯有写出人类容易理解的代码，才是优秀的程序员。     – Martin Flower
+
+团队协作项目，为了保持大家的代码一致性，进行一些代码格式的规范。
+1. 基本要求
+代码缩进使用4个空格，不是Tab键。
+统一使用UTF-8编码，避免乱码问题。
+除了注释，代码中不出现中文。
+每个类写上必要的注释，类的说明，作者，修改时间，联系">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/21/Android编码规范/"/>
+
+
+
+
+
+  <title> Android 编码规范 | Android背锅侠 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Android背锅侠</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Accueil
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/21/Android编码规范/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="XiaoFeng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Android背锅侠">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Android背锅侠" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android 编码规范
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T17:08:21+08:00">
+                2017-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Android-编码规范"><a href="#Android-编码规范" class="headerlink" title="Android 编码规范"></a>Android 编码规范</h1><blockquote>
+<p><strong>任何一个傻瓜都能写出计算机可以理解的代码。唯有写出人类容易理解的代码，才是优秀的程序员。     – Martin Flower</strong></p>
+</blockquote>
+<p><br><br>团队协作项目，为了保持大家的代码一致性，进行一些代码格式的规范。</p>
+<h2 id="1-基本要求"><a href="#1-基本要求" class="headerlink" title="1. 基本要求"></a>1. 基本要求</h2><ul>
+<li>代码缩进使用4个空格，不是Tab键。</li>
+<li>统一使用UTF-8编码，避免乱码问题。</li>
+<li>除了注释，代码中不出现中文。</li>
+<li>每个类写上必要的注释，类的说明，作者，修改时间，联系方式（可选）。</li>
+<li>为了让他人可以容易看懂你的代码，请在关键地方做好注释。</li>
+<li>变量和函数名命名使用“驼峰命名法”，资源相关文件命名使用“下划线命名法”。</li>
+<li>代码中用到的<strong>字符串</strong>、<strong>颜色值</strong>和<strong>控件尺寸</strong>等资源，都统一写到对应的xml文件中（strings.xml, colors.xml, values.xml），方便代码维护和今后的国际化支持。</li>
+<li><strong>强烈建议使用Android Studio或者Intellij IDEA。</strong></li>
+<li><strong>使用 Ctrl+Shift+F 来格式化代码， 使用 Ctrl+Shift+O 来格式化 Import 包。</strong></li>
+</ul>
+<h2 id="2-项目架构"><a href="#2-项目架构" class="headerlink" title="2. 项目架构"></a>2. 项目架构</h2><ul>
+<li>基本遵循<strong>MVP架构</strong>（Model/View/Presenter），把数据源，用户界面和业务逻辑各个层次解耦，增加代码可读性和维护性，也增强了代码的扩展性。</li>
+<li>详细代码可参考<a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">Google官方MVP架构示例</a>。</li>
+</ul>
+<h2 id="3-分包管理"><a href="#3-分包管理" class="headerlink" title="3. 分包管理"></a>3. 分包管理</h2><ul>
+<li>按照组件类型来分包，而不是按业务模块来分包。业务有可能会变，但组件类型是基本不变的。另外，新加入的开发人员，对业务不熟悉，但对组件是很清楚的，理解快，入手也快。</li>
+<li>对于稍微大一点的项目，可以先按模块分包，在子模块中再按照组件类型分包。</li>
+<li><p>分包格式也可参考<a href="https://github.com/googlesamples/android-architecture" target="_blank" rel="external">Google官方MVP架构示例</a>。</p>
+<pre><code>base:存放基础类的包，里面的类以Base为前缀，例如BaseActivity；
+activity:存放activity的包，每个activity命名以Activity结尾，例如MainActivity;
+fragment:存放fragment的包，每个fragment命名以Fragment结尾，例如ChatFragment;
+receiver:存放receiver的包；
+service:存放service的包；
+adapter:存放adapter的包，每个adapter命名以Adapter结尾，例如EventItemAdapter;
+common:存放一些公共常量，例如后端接口、SharedPreferenceKey、IntentExtra等;
+utils:存放工具类的包，比如常见的工具类：LogUtils、DateUtils；
+entity:存放实体类的包；
+widget:存放自定义View的包；
+</code></pre></li>
+</ul>
+<h2 id="4-命名规范"><a href="#4-命名规范" class="headerlink" title="4. 命名规范"></a>4. 命名规范</h2><h4 id="包命名"><a href="#包命名" class="headerlink" title="包命名"></a>包命名</h4><ul>
+<li>采用反域名命名规则，包名全部小写，连续的单词只是简单地连接起来，不使用下划线。</li>
+<li>一级包名为com，二级包名为xxx（可以是公司域名或者个人命名），三级包名根据应用进行命名，四级包名为模块名或层级名。如com.isa.crm.activity。</li>
+</ul>
+<h4 id="类命名"><a href="#类命名" class="headerlink" title="类命名"></a>类命名</h4><ul>
+<li>大驼峰命名。除常见的缩写单词以外，不使用缩写，缩写的单词每个字母都大写。</li>
+<li>公共的工具类建议以Utils、Manager为后缀，如LogUtils。接口命名遵循以上原则，以I为前缀，或以able或ible为后缀。</li>
+</ul>
+<h4 id="变量命名"><a href="#变量命名" class="headerlink" title="变量命名"></a>变量命名</h4><ul>
+<li><p><strong>成员变量命名</strong><br>小驼峰命名。不推荐使用谷歌的前面加m的编码风格（如果使用团队中使用m，则统一使用）。</p>
+</li>
+<li><p><strong>临时变量命名</strong><br>小驼峰命名。</p>
+</li>
+<li><p><strong>常量命名</strong><br> 单词每个字母均大写。单词之间下划线连接。</p>
+</li>
+</ul>
+<h4 id="方法命名"><a href="#方法命名" class="headerlink" title="方法命名"></a>方法命名</h4><p>小驼峰命名。使用动词或动名词。</p>
+<h4 id="资源文件命名"><a href="#资源文件命名" class="headerlink" title="资源文件命名"></a>资源文件命名</h4><ul>
+<li><p><strong>布局文件命名</strong><br> {组件_功能}，下划线命名，全部小写。如：activity_login</p>
+</li>
+<li><p><strong>控件id命名</strong><br> {控件_范围_功能}， 下划线命名，全部小写。如：et_login_password</p>
+</li>
+<li><p><strong>字符串id命名</strong><br> {控件类型_功能}， 如：btn<em>login<br> 页面标题，命名格式为：title</em>{页面}<br> 按钮文字，命名格式为：btn<em>{按钮事件}<br> 标签文字，命名格式为：label</em>{标签文字}<br> 选项卡文字，命名格式为：tab<em>{选项卡文字}<br> 消息框文字，命名格式为：toast</em>{消息}<br> 编辑框的提示文字，命名格式为：hint<em>{提示信息}<br> 图片的描述文字，命名格式为：desc</em>{图片文字}<br> 对话框的文字，命名格式为：dialog_{文字}</p>
+</li>
+<li><p><strong>图片资源命名</strong><br> 图标资源以ic为前缀，例如ic_chat，指聊天图标；<br> 背景图片以bg为前缀，例如bg_login，指的是登录页的背景图；<br> 按钮图片以btn为前缀，例如btn_login，指的是登录按钮的图片，不过这只有一种状态，需要加上状态的可以在后面添加，例如btn_login_pressed，表示登录按钮按下的图片；<br> 当使用shape和selector文件为背景或者按钮时，命名参照以上说明；</p>
+</li>
+</ul>
+<ul>
+<li><strong>动画文件命名</strong><br> {动画类型_动画方向}，下划线命名法，全部小写。如：fade_in</li>
+</ul>
+<h4 id="常用控件缩写"><a href="#常用控件缩写" class="headerlink" title="常用控件缩写"></a>常用控件缩写</h4><table>
+<thead>
+<tr>
+<th>控件</th>
+<th>缩写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linearlayout</td>
+<td>ll</td>
+</tr>
+<tr>
+<td>RelativeLayout</td>
+<td>rl</td>
+</tr>
+<tr>
+<td>TextView</td>
+<td>tv</td>
+</tr>
+<tr>
+<td>EditText</td>
+<td>et</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>btn</td>
+</tr>
+<tr>
+<td>ImageButton</td>
+<td>imgBtn</td>
+</tr>
+<tr>
+<td>ImageView</td>
+<td>iv</td>
+</tr>
+<tr>
+<td>CheckBox</td>
+<td>chb</td>
+</tr>
+<tr>
+<td>ListView</td>
+<td>lv</td>
+</tr>
+<tr>
+<td>GridView</td>
+<td>gv</td>
+</tr>
+<tr>
+<td>ScrollView</td>
+<td>sv</td>
+</tr>
+<tr>
+<td>WebView</td>
+<td>wv</td>
+</tr>
+<tr>
+<td>ProgressBar</td>
+<td>proBar</td>
+</tr>
+<tr>
+<td>RadioButton</td>
+<td>rb</td>
+</tr>
+<tr>
+<td>Spinner</td>
+<td>spn</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ol>
+<li><p>其他内容参见谷歌编码规范<br>中文<a href="http://blog.sina.com.cn/s/blog_48d491300100zwzg.html#use-todo-comments" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_48d491300100zwzg.html#use-todo-comments</a><br>英文<a href="http://source.android.com/source/code-style.html" target="_blank" rel="external">http://source.android.com/source/code-style.html</a></p>
+</li>
+<li><p>其他未写明的欢迎补充，现有的有疑惑的欢迎提问，有缺点的欢迎质疑讨论修改。</p>
+</li>
+</ol>
+<p><br><br><br><br></p>
+<h1 id="新浪微博Android-SDK-Java代码规范"><a href="#新浪微博Android-SDK-Java代码规范" class="headerlink" title="新浪微博Android SDK Java代码规范"></a>新浪微博Android SDK Java代码规范</h1><p>代码规范的重要性不言而喻，但是一般公司都不太重视代码规范。在代码走读的时候，由于没有统一的规范，导致每个人都认为自己写的是对的。</p>
+<p>在查看新浪微博Android SDK代码的时候，发现了个<a href="https://github.com/sinaweibosdk/weibo_android_sdk/tree/master/demo-src/WeiboSDK/src/com/sina/weibo/sdk/codestyle" target="_blank" rel="external">codestyle包</a>。一个短小精悍的CodingRuler类却包含了比较全面的Java代码规范。</p>
+<p>贴出来分享一下。当然，如果想要更详细的，写以查看 <a href="http://source.android.com/source/code-style.html" target="_blank" rel="external">Google Java Style</a></p>
+<ol>
+<li><p><strong>weibo_android_sdk/demo-src/WeiboSDK/src/com/sina/weibo/sdk/codestyle/CodingRuler.java</strong></p>
+<pre><code>/*
+ * 文件名（可选），如 CodingRuler.java
+ * 
+ * 版本信息（可选），如：@version 1.0.0
+ * 
+ * 版权申明（开源代码一般都需要添加），如：Copyright (C) 2010-2013 SINA Corporation.
+ */
+
+package com.sina.weibo.sdk.codestyle;
+
+/**
+ * 类的大体描述放在这里。
+ * 
+ * &lt;p&gt;
+ * &lt;b&gt;NOTE：以下部分为一个简要的编码规范，更多规范请参考 ORACLE 官方文档。&lt;/b&gt;&lt;br&gt;
+ * 地址：http://www.oracle.com/technetwork/java/codeconventions-150003.pdf&lt;br&gt;
+ * 另外，请使用 UTF-8 格式来查看代码，避免出现中文乱码。&lt;br&gt;
+ * &lt;b&gt;至于注释应该使用中文还是英文，请自己行决定，根据公司或项目的要求而定，推荐使用英文。&lt;/b&gt;&lt;br&gt;
+ * &lt;/p&gt;
+ * &lt;h3&gt;1. 整理代码&lt;/h3&gt;
+ * &lt;ul&gt;
+ *    &lt;li&gt;1.1. Java 代码中不允许出现在警告，无法消除的警告要用 @SuppressWarnings。
+ *    &lt;li&gt;1.2. 去掉无用的包、方法、变量等，减少僵尸代码。
+ *    &lt;li&gt;1.3. 使用 Lint 工具来查看并消除警告和错误。
+ *    &lt;li&gt;1.4. 使用 Ctrl+Shift+F 来格式化代码，然后再进行调整。
+ *    &lt;li&gt;1.5. 使用 Ctrl+Shift+O 来格式化 Import 包。
+ * &lt;/ul&gt;
+ * 
+ * &lt;h3&gt;2. 命名规则&lt;/h3&gt;
+ *    &lt;h3&gt;2.1. 基本原则&lt;/h3&gt;
+ *    &lt;ul&gt;
+ *         &lt;li&gt;2.1.1. 变量，方法，类命名要表义，严格禁止使用 name1, name2 等命名。
+ *         &lt;li&gt;2.1.2. 命名不能太长，适当使用简写或缩写。（最好不要超过 25 个字母）
+ *         &lt;li&gt;2.1.3. 方法名以小写字母开始，以后每个单词首字母大写。
+ *         &lt;li&gt;2.1.4. 避免使用相似或者仅在大小写上有区别的名字。
+ *         &lt;li&gt;2.1.5. 避免使用数字，但可用 2 代替 to，用 4 代替 for 等，如 go2Clean。
+ *    &lt;/ul&gt;
+ *    
+ *    &lt;h3&gt;2.2. 类、接口&lt;/h3&gt;
+ *    &lt;ul&gt;
+ *         &lt;li&gt;2.2.1. 所有单词首字母都大写。使用能确切反应该类、接口含义、功能等的词。一般采用名词。
+ *         &lt;li&gt;2.2.2. 接口带 I 前缀，或able, ible, er等后缀。如ISeriable。
+ *    &lt;/ul&gt;
+ *    
+ *    &lt;h3&gt;2.3. 字段、常量&lt;/h3&gt;
+ *    &lt;ul&gt;
+ *         &lt;li&gt;2.3.1. 成员变量以 m 开头，静态变量以 s 开头，如 mUserName, sInstance。
+ *         &lt;li&gt;2.3.2. 常量全部大写，在词与词之前用下划线连接，如 MAX_NUMBER。
+ *         &lt;li&gt;2.3.3. 代码中禁止使用硬编码，把一些数字或字符串定义成常用量。
+ *         &lt;li&gt;2.3.4. 对于废弃不用的函数，为了保持兼容性，通常添加 @Deprecated，如 {@link #doSomething()}
+ *    &lt;/ul&gt;
+ *         
+ * &lt;h3&gt;3. 注释&lt;/h3&gt;
+ *    请参考 {@link #SampleCode} 类的注释。
+ *    &lt;ul&gt;
+ *    &lt;li&gt;3.1. 常量注释，参见 {@link #ACTION_MAIN} 
+ *    &lt;li&gt;3.2. 变量注释，参见 {@link #mObject0} 
+ *    &lt;li&gt;3.3. 函数注释，参见 {@link #doSomething(int, float, String)}
+ *    &lt;/ul&gt; 
+ *    
+ * &lt;h3&gt;4. Class 内部顺序和逻辑&lt;/h3&gt;
+ * &lt;ul&gt;
+ *    &lt;li&gt;4.1. 每个 class 都应该按照一定的逻辑结构来排列基成员变量、方法、内部类等，
+ *             从而达到良好的可读性。
+ *    &lt;li&gt;4.2. 总体上来说，要按照先 public, 后 protected, 最后 private, 函数的排布
+ *             也应该有一个逻辑的先后顺序，由重到轻。
+ *    &lt;li&gt;4.3. 以下顺序可供参考：
+ *         定义 TAG，一般为 private（可选）&lt;br&gt;
+ *         定义 public 常量&lt;br&gt;
+ *         定义 private 常量、内部类&lt;br&gt;
+ *         定义 private 变量&lt;br&gt;
+ *         定义 public 方法&lt;br&gt;
+ *         定义 protected 方法&lt;br&gt;
+ *         定义 private 方法&lt;br&gt;
+ * &lt;/ul&gt;        
+ * 
+ * &lt;h3&gt;5. 表达式与语句&lt;/h3&gt;
+ *    &lt;h3&gt;5.1. 基本原则：采用紧凑型风格来编写代码&lt;/h3&gt;
+ *    &lt;h3&gt;5.2. 细则&lt;/h3&gt;
+ *    &lt;ul&gt;
+ *         &lt;li&gt;5.2.1. 条件表示式，参见 {@link #conditionFun(boolean)} 
+ *         &lt;li&gt;5.2.2. switch 语句，参见 {@link #switchFun(int)}
+ *         &lt;li&gt;5.2.3. 循环语句，参见 {@link #circulationFun(boolean)}
+ *         &lt;li&gt;5.2.4. 错误与异常，参见 {@link #exceptionFun()}
+ *         &lt;li&gt;5.2.5. 杂项，参见 {@link #otherFun()}
+ *         &lt;li&gt;5.2.6. 批注，参见 {@link #doSomething(int, float, String)}
+ *    &lt;/ul&gt;
+ * 
+ * @author 作者名
+ * @since 2013-XX-XX
+ */
+@SuppressWarnings(&quot;unused&quot;)
+public class CodingRuler {
+
+    /** 公有的常量注释 */
+    public static final String ACTION_MAIN = &quot;android.intent.action.MAIN&quot;;
+
+    /** 私有的常量注释（同类型的常量可以分块并紧凑定义） */
+    private static final int MSG_AUTH_NONE    = 0;
+    private static final int MSG_AUTH_SUCCESS = 1;
+    private static final int MSG_AUTH_FAILED  = 2;
+
+    /** 保护的成员变量注释 */
+    protected Object mObject0;
+
+    /** 私有的成员变量 mObject1 注释（同类型的成员变量可以分块并紧凑定义） */
+    private Object mObject1;
+    /** 私有的成员变量 mObject2 注释 */
+    private Object mObject2;
+    /** 私有的成员变量 mObject3 注释 */
+    private Object mObject3;
+
+    /**
+     * 对于注释多于一行的，采用这种方式来
+     * 定义该变量
+     */
+    private Object mObject4;
+
+    /**
+     * 公有方法描述...
+     * 
+     * @param param1  参数1描述...
+     * @param param2  参数2描述...
+     * @param paramXX 参数XX描述... （注意：请将参数、描述都对齐）
+     */
+    public void doSomething(int param1, float param2, String paramXX) {
+        // 以下注释标签可以通过Eclipse内置的Task插件看到
+        // TODO  使用TODO来标记代码，说明标识处有功能代码待编写
+        // FIXME 使用FIXME来标记代码，说明标识处代码需要修正，甚至代码是
+        //       错误的，不能工作，需要修复
+        // XXX   使用XXX来标记代码，说明标识处代码虽然实现了功能，但是实现
+        //       的方法有待商榷，希望将来能改进
+    }
+
+    /**
+     * 保护方法描述...
+     */
+    @Deprecated
+    protected void doSomething() {
+        // ...implementation
+    }
+
+    /**
+     * 私有方法描述...
+     * 
+     * @param param1  参数1描述...
+     * @param param2  参数2描述...
+     */
+    private void doSomethingInternal(int param1, float param2) {
+        // ...implementation        
+    }
+
+    /**
+     * 条件表达式原则。
+     */
+    private void conditionFun() {
+        boolean condition1 = true;
+        boolean condition2 = false;
+        boolean condition3 = false;
+        boolean condition4 = false;
+        boolean condition5 = false;
+        boolean condition6 = false;
+
+        // 原则： 1. 所有 if 语句必须用 {} 包括起来，即便只有一句，禁止使用不带{}的语句
+        //       2. 在含有多种运算符的表达式中，使用圆括号来避免运算符优先级问题
+        //       3. 判断条件很多时，请将其它条件换行
+        if (condition1) {
+            // ...implementation
+        }
+
+        if (condition1) {
+            // ...implementation
+        } else {
+            // ...implementation
+        }
+
+        if (condition1)          /* 禁止使用不带{}的语句 */
+            condition3 = true;
+
+        if ((condition1 == condition2) 
+                || (condition3 == condition4)
+                || (condition5 == condition6)) {
+
+        }
+    }
+
+    /**
+     * Switch语句原则。
+     */
+    private void switchFun() {
+
+        // 原则： 1. switch 语句中，break 与下一条 case 之间，空一行
+        //       2. 对于不需要 break 语句的，请使用 /* Falls through */来标注
+        //       3. 请默认写上 default 语句，保持完整性
+        int code = MSG_AUTH_SUCCESS;
+        switch (code) {
+        case MSG_AUTH_SUCCESS:
+            break;
+
+        case MSG_AUTH_FAILED:
+            break;
+
+        case MSG_AUTH_NONE:
+            /* Falls through */
+        default:
+            break;
+        }
+    }
+
+    /**
+     * 循环表达式。
+     */
+    private void circulationFun() {
+
+        // 原则： 1. 尽量使用for each语句代替原始的for语句
+        //       2. 循环中必须有终止循环的条件或语句，避免死循环
+        //       3. 循环要尽可能的短, 把长循环的内容抽取到方法中去
+        //       4. 嵌套层数不应超过3层, 要让循环清晰可读
+
+        int array[] = { 1, 2, 3, 4, 5 };
+        for (int data : array) {
+            // ...implementation
+        }
+
+        int length = array.length;
+        for (int ix = 0; ix &lt; length; ix++) {
+            // ...implementation
+        }
+
+        boolean condition = true;
+        while (condition) {
+            // ...implementation
+        }
+
+        do {
+            // ...implementation
+        } while (condition);
+    }
+
+    /**
+     * 异常捕获原则。
+     */
+    private void exceptionFun() {
+
+        // 原则： 1. 捕捉异常是为了处理它，通常在异常catch块中输出异常信息。
+        //       2. 资源释放的工作，可以放到 finally 块部分去做。如关闭 Cursor 等。
+        try {
+            // ...implementation
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+    }
+
+    /**
+     * 其它原则（整理中...）。
+     */
+    private void otherFun() {
+        // TODO
+    }    
+}
+</code></pre></li>
+<li><p><strong>weibo_android_sdk/demo-src/WeiboSDK/src/com/sina/weibo/sdk/codestyle/SampleCode.java</strong></p>
+<pre><code>/*
+ * Copyright (C) 2010-2013 The SINA WEIBO Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.sina.weibo.sdk.codestyle;
+
+/**
+ * 类的大体描述放在这里。
+ *         
+ * @author 作者名
+ * @since 2013-XX-XX
+ */
+@SuppressWarnings(&quot;unused&quot;)
+public class SampleCode {
+
+    /** 公有的常量注释 */
+    public static final String ACTION_MAIN = &quot;android.intent.action.MAIN&quot;;
+
+    /** 私有的常量注释（同类型的常量可以分块并紧凑定义） */
+    private static final int MSG_AUTH_NONE    = 0;
+    private static final int MSG_AUTH_SUCCESS = 1;
+    private static final int MSG_AUTH_FAILED  = 2;
+
+    /** 保护的成员变量注释 */
+    protected Object mObject0;
+
+    /** 私有的成员变量 mObject1 注释（同类型的成员变量可以分块并紧凑定义） */
+    private Object mObject1;
+    /** 私有的成员变量 mObject2 注释 */
+    private Object mObject2;
+    /** 私有的成员变量 mObject3 注释 */
+    private Object mObject3;
+
+    /**
+     * 对于注释多于一行的，采用这种方式来
+     * 定义该变量
+     */
+    private Object mObject4;
+
+    /**
+     * 公有方法描述...
+     * 
+     * @param param1  参数1描述...
+     * @param param2  参数2描述...
+     * @param paramXX 参数XX描述... （注意：请将参数、描述都对齐）
+     */
+    public void doSomething(int param1, float param2, String paramXX) {
+        // ...implementation
+    }
+
+    /**
+     * 保护方法描述...
+     */
+    protected void doSomething() {
+        // ...implementation        
+    }
+
+    /**
+     * 私有方法描述...
+     * 
+     * @param param1  参数1描述...
+     * @param param2  参数2描述...
+     */
+    private void doSomethingInternal(int param1, float param2) {
+        // ...implementation        
+    }
+}
+</code></pre></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/21/使用Hexo创建和管理Github-Pages/" rel="next" title="使用Hexo创建和管理Github Pages">
+                <i class="fa fa-chevron-left"></i> 使用Hexo创建和管理Github Pages
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/21/RxJava-Retrofit2-OkHttp3封装及踩坑/" rel="prev" title="RxJava + Retrofit2 + OkHttp3 封装及踩坑">
+                RxJava + Retrofit2 + OkHttp3 封装及踩坑 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Des Matières
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Ensemble
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="XiaoFeng" />
+          <p class="site-author-name" itemprop="name">XiaoFeng</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">articles</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Android-编码规范"><span class="nav-number">1.</span> <span class="nav-text">Android 编码规范</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本要求"><span class="nav-number">1.1.</span> <span class="nav-text">1. 基本要求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-项目架构"><span class="nav-number">1.2.</span> <span class="nav-text">2. 项目架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-分包管理"><span class="nav-number">1.3.</span> <span class="nav-text">3. 分包管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-命名规范"><span class="nav-number">1.4.</span> <span class="nav-text">4. 命名规范</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#包命名"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">包命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#类命名"><span class="nav-number">1.4.0.2.</span> <span class="nav-text">类命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#变量命名"><span class="nav-number">1.4.0.3.</span> <span class="nav-text">变量命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法命名"><span class="nav-number">1.4.0.4.</span> <span class="nav-text">方法命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#资源文件命名"><span class="nav-number">1.4.0.5.</span> <span class="nav-text">资源文件命名</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用控件缩写"><span class="nav-number">1.4.0.6.</span> <span class="nav-text">常用控件缩写</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-number">1.5.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新浪微博Android-SDK-Java代码规范"><span class="nav-number">2.</span> <span class="nav-text">新浪微博Android SDK Java代码规范</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoFeng</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Thème -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

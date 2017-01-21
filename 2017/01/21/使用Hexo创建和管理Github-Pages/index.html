@@ -1,0 +1,724 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, Android" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="在Github上创建Github Pages
+Github上面新建仓库：&amp;lt;username&amp;gt;.github.io，必须以这个格式命名。
+此时，你的GitHub个人站点其实已经建成了，没错，就这么简单。。  
+如果这时候push一个index.html到站点根目录，就可以通过 https://&amp;lt;username&amp;gt;.github.io 访问你的个人主页了。但是一般不这么做，因为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Hexo创建和管理Github Pages">
+<meta property="og:url" content="http://yoursite.com/2017/01/21/使用Hexo创建和管理Github-Pages/index.html">
+<meta property="og:site_name" content="Android背锅侠">
+<meta property="og:description" content="在Github上创建Github Pages
+Github上面新建仓库：&amp;lt;username&amp;gt;.github.io，必须以这个格式命名。
+此时，你的GitHub个人站点其实已经建成了，没错，就这么简单。。  
+如果这时候push一个index.html到站点根目录，就可以通过 https://&amp;lt;username&amp;gt;.github.io 访问你的个人主页了。但是一般不这么做，因为">
+<meta property="og:updated_time" content="2017-01-21T08:09:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用Hexo创建和管理Github Pages">
+<meta name="twitter:description" content="在Github上创建Github Pages
+Github上面新建仓库：&amp;lt;username&amp;gt;.github.io，必须以这个格式命名。
+此时，你的GitHub个人站点其实已经建成了，没错，就这么简单。。  
+如果这时候push一个index.html到站点根目录，就可以通过 https://&amp;lt;username&amp;gt;.github.io 访问你的个人主页了。但是一般不这么做，因为">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/01/21/使用Hexo创建和管理Github-Pages/"/>
+
+
+
+
+
+  <title> 使用Hexo创建和管理Github Pages | Android背锅侠 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Android背锅侠</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Accueil
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/01/21/使用Hexo创建和管理Github-Pages/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="XiaoFeng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Android背锅侠">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Android背锅侠" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                使用Hexo创建和管理Github Pages
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posté le</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-01-21T13:58:08+08:00">
+                2017-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="在Github上创建Github-Pages"><a href="#在Github上创建Github-Pages" class="headerlink" title="在Github上创建Github Pages"></a>在Github上创建Github Pages</h2><ul>
+<li>Github上面新建仓库：<strong>&lt;username&gt;.github.io</strong>，<em>必须以这个格式命名</em>。</li>
+<li>此时，你的GitHub个人站点其实已经建成了，没错，就这么简单。。  <blockquote>
+<p>如果这时候push一个index.html到站点根目录，就可以通过 <strong><em><a href="https://&lt;username&gt;.github.io" target="_blank" rel="external">https://&lt;username&gt;.github.io</a></em></strong> 访问你的<a href="https://bbssyyuui.github.io" target="_blank" rel="external"><strong>个人主页</strong></a>了。<br>但是一般不这么做，因为这样的站点太丑陋，也不想花时间完全自己去写一个博客网站。<br>所以我们需要Hexo帮我们自动建站，请继续往下看。。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><ul>
+<li>首先你电脑上需要先安装好NodeJS环境，自行百度。</li>
+<li><p>安装Hexo</p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><div class="line"><span class="built_in">npm</span> install hexo-cli -g</div><div class="line"><span class="comment">#npm install hexo --save</span></div><div class="line"><span class="comment">#如果命令无法运行，可以尝试更换taobao的npm源</span></div><div class="line"><span class="built_in">npm</span> install -g cnpm --registry=https:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化Hexo配置</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><div class="line"><span class="comment">#1. 创建一个Hexo站点目录，如 /blog/hexo，并cd到该目录。</span></div><div class="line"><span class="comment">#2. 初始化Hexo</span></div><div class="line">   <span class="variable">$ </span>hexo init</div><div class="line">   <span class="variable">$ </span>npm install</div><div class="line"><span class="comment">#3. 本地生成站点，查看效果</span></div><div class="line">   <span class="variable">$ </span>hexo generate</div><div class="line">   <span class="variable">$ </span>hexo server</div><div class="line">   <span class="comment">## 简化命令 ##</span></div><div class="line">   <span class="variable">$ </span>hexo g</div><div class="line">   <span class="variable">$ </span>hexo s  </div><div class="line">   <span class="comment">## 浏览器中输入localhost:4000，查看效果</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="部署Hexo站点到Github-Pages上"><a href="#部署Hexo站点到Github-Pages上" class="headerlink" title="部署Hexo站点到Github Pages上"></a>部署Hexo站点到Github Pages上</h2><ul>
+<li><p>配置SSH秘钥</p>
+<ol>
+<li>cd 到 ~/.ssh</li>
+<li><p>如果目录不存在，需要新建</p>
+<figure class="highlight vbnet"><table><tr><td class="code"><pre><div class="line">$ ssh-keygen -t rsa -C <span class="string">"your_email@example.com"</span></div><div class="line"><span class="meta">#这将按照你提供的邮箱地址，创建一对密钥</span></div><div class="line">Generating <span class="keyword">public</span>/<span class="keyword">private</span> rsa <span class="keyword">key</span> pair.</div><div class="line">Enter file <span class="keyword">in</span> which <span class="keyword">to</span> save the <span class="keyword">key</span> (/c/Users/you/.ssh/id_rsa): [Press enter]</div><div class="line"><span class="meta">#直接回车，之后提示输入密码和确认密码，也是直接回车两次。</span></div><div class="line"><span class="meta">#此时屏幕输出：</span></div><div class="line">Your identification has been saved <span class="keyword">in</span> /c/Users/you/.ssh/id_rsa.</div><div class="line">Your <span class="keyword">public</span> <span class="keyword">key</span> has been saved <span class="keyword">in</span> /c/Users/you/.ssh/id_rsa.pub.</div><div class="line">The <span class="keyword">key</span> fingerprint <span class="keyword">is</span>:</div><div class="line"><span class="number">01</span>:<span class="number">0</span>f:f4:<span class="number">3</span>b:ca:<span class="number">85</span>:d6:<span class="number">17</span>:a1:<span class="number">7</span>d:f0:<span class="number">68</span>:<span class="number">9</span>d:f0:a2:db your_email@example.com</div></pre></td></tr></table></figure>
+</li>
+<li><p>在GitHub账户中添加你的公钥</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><div class="line"><span class="variable">$ </span>clip &lt; ~<span class="regexp">/.ssh/id</span>_rsa.pub</div><div class="line">或者手动复制id_rsa.pub文件内容。</div><div class="line">登录GitHub，到个人-&gt;设置-&gt;SSH keys中粘贴刚才的公钥，title随便。</div><div class="line">点击 [Add SSH key]</div></pre></td></tr></table></figure>
+</li>
+<li><p>测试SSH秘钥是否添加成功</p>
+<figure class="highlight vbnet"><table><tr><td class="code"><pre><div class="line"> $ ssh -T git@github.com</div><div class="line"> 如果是下面的反馈：</div><div class="line">The authenticity <span class="keyword">of</span> host <span class="comment">'github.com (207.97.227.239)' can't be established.</span></div><div class="line">RSA <span class="keyword">key</span> fingerprint <span class="keyword">is</span> <span class="number">16</span>:<span class="number">27</span>:ac:a5:<span class="number">76</span>:<span class="number">28</span>:<span class="number">2</span>d:<span class="number">36</span>:<span class="number">63</span>:<span class="number">1</span>b:<span class="number">56</span>:<span class="number">4</span>d:eb:df:a6:<span class="number">48.</span></div><div class="line">Are you sure you want <span class="keyword">to</span> <span class="keyword">continue</span> connecting (yes/no)?</div><div class="line">不要紧张，输入yes就好，然后会看到：</div><div class="line">Hi cnfeat! You<span class="comment">'ve successfully authenticated, but GitHub does not provide shell access.</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>设置用户信息</p>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">$ git config --global user<span class="selector-class">.name</span> <span class="string">"cnfeat"</span> <span class="comment">//用户名（将出现在git提交记录中）</span></div><div class="line">$ git config --global user<span class="selector-class">.email</span>  <span class="string">"cnfeat@gmail.com"</span> <span class="comment">//自己的邮箱</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>修改Hexo的部署路径，使其与github关联</p>
+<ol>
+<li><p>修改Hexo根目录下的_config.yml文件，添加deploy字段</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="meta"># Deployment</span></div><div class="line"><span class="meta">## Docs: https:<span class="comment">//hexo.io/docs/deployment.html</span></span></div><div class="line"><span class="symbol">deploy:</span></div><div class="line"><span class="symbol">  type:</span> git</div><div class="line"><span class="symbol">  repository:</span> https:<span class="comment">//github.com/bbssyyuui/bbssyyuui.github.io.git</span></div><div class="line"><span class="symbol">  branch:</span> master</div></pre></td></tr></table></figure>
+</li>
+<li><p>生成并部署站点</p>
+<figure class="highlight clean"><table><tr><td class="code"><pre><div class="line">$ hexo clean <span class="comment">// 当出现一些奇怪错误的时候，可以尝试清空</span></div><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div><div class="line">## 简化命令 ##</div><div class="line">$ hexo g</div><div class="line">$ hexo d</div><div class="line">## 更简化命令 ##</div><div class="line">$ hexo g -d</div></pre></td></tr></table></figure>
+</li>
+<li><p>查看站点<br>浏览器输入你的个人站点网址：<a href="https://bbssyyuui.github.io.git" target="_blank" rel="external">https://bbssyyuui.github.io.git</a><br>OK，大功告成！！！</p>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="安装Hexo的Markdown编辑插件-hexo-hey"><a href="#安装Hexo的Markdown编辑插件-hexo-hey" class="headerlink" title="安装Hexo的Markdown编辑插件  hexo-hey"></a>安装Hexo的Markdown编辑插件  hexo-hey</h2><p><a href="https://github.com/nihgwu/hexo-hey" target="_blank" rel="external"><strong>hexo-hey</strong></a>这个插件是集成在Hexo站点中的，可以方便的在线后台编辑、管理和发布你的文章。</p>
+<ul>
+<li><p>安装hexo-hey</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><div class="line">$ npm <span class="keyword">install</span> hexo-hey <span class="comment">--save</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>修改Hexo根目录下的_config.yml文件，添加admin字段</p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><div class="line"><span class="meta"># Admin</span></div><div class="line"><span class="symbol">admin:</span></div><div class="line"><span class="symbol">    name:</span> hexo</div><div class="line"><span class="symbol">    password:</span> hey</div><div class="line"><span class="symbol">    secret:</span> hey hexo</div><div class="line"><span class="symbol">    expire:</span> <span class="number">60</span>*<span class="number">1</span></div><div class="line">    <span class="meta"># cors: http:<span class="comment">//localhost:3000</span></span></div></pre></td></tr></table></figure>
+</li>
+<li><p>重新生成和预览站点</p>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><div class="line"><span class="variable">$ </span>hexo g</div><div class="line"><span class="variable">$ </span>hexo s</div><div class="line"><span class="comment"># 通过访问 http://localhost:4000/admin 后台页面查看和管理</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>重新生成和部署站点</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><div class="line">$ hexo g <span class="_">-d</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="更换Hexo主题"><a href="#更换Hexo主题" class="headerlink" title="更换Hexo主题"></a>更换Hexo主题</h2><p>默认生成的Hexo站点是比较丑陋的，Hexo官网提供了<a href="https://hexo.io/themes/" target="_blank" rel="external">很多主题</a>供你使用。<br>这里推荐个不错的主题 <a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external"><strong>hexo-theme-next</strong></a></p>
+<ul>
+<li><p>下载主题</p>
+<figure class="highlight vim"><table><tr><td class="code"><pre><div class="line">$ <span class="keyword">cd</span> hexo/themes</div><div class="line">$ git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/iissnan/hexo-theme-<span class="keyword">next</span>.git</div></pre></td></tr></table></figure>
+</li>
+<li><p>修改主题配置</p>
+<pre><code># 设置主题
+# 修改Hexo根目录下的_config.yml文件中的theme字段
+theme: hexo-theme-next
+# 配置主题
+# 修改themes/hexo-theme-next/目录下的_config.yml，使其符合你的喜好。
+scheme: Pisces
+...
+</code></pre></li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>参考：<br><a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="external">https://hexo.io/zh-cn/docs/</a><br><a href="https://my.oschina.net/ryaneLee/blog/638440" target="_blank" rel="external">https://my.oschina.net/ryaneLee/blog/638440</a><br><a href="https://github.com/nihgwu/hexo-hey" target="_blank" rel="external">https://github.com/nihgwu/hexo-hey</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/21/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/01/21/Android编码规范/" rel="prev" title="Android 编码规范">
+                Android 编码规范 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table Des Matières
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Ensemble
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="XiaoFeng" />
+          <p class="site-author-name" itemprop="name">XiaoFeng</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">articles</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在Github上创建Github-Pages"><span class="nav-number">1.</span> <span class="nav-text">在Github上创建Github Pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Hexo"><span class="nav-number">2.</span> <span class="nav-text">安装Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Hexo站点到Github-Pages上"><span class="nav-number">3.</span> <span class="nav-text">部署Hexo站点到Github Pages上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Hexo的Markdown编辑插件-hexo-hey"><span class="nav-number">4.</span> <span class="nav-text">安装Hexo的Markdown编辑插件  hexo-hey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换Hexo主题"><span class="nav-number">5.</span> <span class="nav-text">更换Hexo主题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoFeng</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Thème -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
