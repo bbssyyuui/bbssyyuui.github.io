@@ -1,0 +1,657 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT, Android" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="下拉刷新和上拉加载更多，从设计层面上来说，就不是同一个层面上的，从Google官方推出的下拉刷新控件SwipeRefreshLayout就可以看出。一般来说，下拉刷新是以包裹整个列表控件的容器来实现的，而上拉加载更多是以列表控件的一部分扩展（footerView）来实现的。
+下拉刷新
+Google官方的SwipeRefreshLayoutxml中控件初始化：&amp;lt;android.support.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RecyclerView的下拉刷新与上拉加载更多">
+<meta property="og:url" content="http://yoursite.com/2017/02/04/RecyclerView的下拉刷新与上拉加载更多/index.html">
+<meta property="og:site_name" content="Android背锅侠">
+<meta property="og:description" content="下拉刷新和上拉加载更多，从设计层面上来说，就不是同一个层面上的，从Google官方推出的下拉刷新控件SwipeRefreshLayout就可以看出。一般来说，下拉刷新是以包裹整个列表控件的容器来实现的，而上拉加载更多是以列表控件的一部分扩展（footerView）来实现的。
+下拉刷新
+Google官方的SwipeRefreshLayoutxml中控件初始化：&amp;lt;android.support.">
+<meta property="og:updated_time" content="2017-02-21T14:02:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RecyclerView的下拉刷新与上拉加载更多">
+<meta name="twitter:description" content="下拉刷新和上拉加载更多，从设计层面上来说，就不是同一个层面上的，从Google官方推出的下拉刷新控件SwipeRefreshLayout就可以看出。一般来说，下拉刷新是以包裹整个列表控件的容器来实现的，而上拉加载更多是以列表控件的一部分扩展（footerView）来实现的。
+下拉刷新
+Google官方的SwipeRefreshLayoutxml中控件初始化：&amp;lt;android.support.">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/02/04/RecyclerView的下拉刷新与上拉加载更多/"/>
+
+
+
+
+
+  <title> RecyclerView的下拉刷新与上拉加载更多 | Android背锅侠 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Android背锅侠</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+    
+      <p class="site-subtitle"></p>
+    
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/04/RecyclerView的下拉刷新与上拉加载更多/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="XiaoFeng">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.gif">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Android背锅侠">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Android背锅侠" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                RecyclerView的下拉刷新与上拉加载更多
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-04T00:46:28+08:00">
+                2017-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>下拉刷新</strong>和<strong>上拉加载更多</strong>，从设计层面上来说，就不是同一个层面上的，从Google官方推出的下拉刷新控件SwipeRefreshLayout就可以看出。<br>一般来说，<strong>下拉刷新</strong>是以包裹整个列表控件的容器来实现的，而<strong>上拉加载更多</strong>是以列表控件的一部分扩展（footerView）来实现的。</p>
+<h4 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h4><ol>
+<li>Google官方的SwipeRefreshLayout<br>xml中控件初始化：<figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">&lt;android<span class="selector-class">.support</span><span class="selector-class">.v4</span><span class="selector-class">.widget</span><span class="selector-class">.SwipeRefreshLayout</span></div><div class="line">    android:layout_width=<span class="string">"match_parent"</span></div><div class="line">    android:layout_height=<span class="string">"match_parent"</span>&gt;</div><div class="line"></div><div class="line">    &lt;android<span class="selector-class">.support</span><span class="selector-class">.v7</span><span class="selector-class">.widget</span><span class="selector-class">.RecyclerView</span></div><div class="line">        android:id=<span class="string">"@+id/recyclerView"</span></div><div class="line">        android:layout_width=<span class="string">"match_parent"</span></div><div class="line">        android:layout_height=<span class="string">"match_parent"</span>/&gt;</div><div class="line"></div><div class="line">&lt;/android<span class="selector-class">.support</span><span class="selector-class">.v4</span><span class="selector-class">.widget</span><span class="selector-class">.SwipeRefreshLayout</span>&gt;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>java类中实现<br><figure class="highlight processing"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 设置下拉出现小圆圈是否是缩放出现，出现的位置，最大的下拉位置</span></div><div class="line">mySwipeRefreshLayout.setProgressViewOffset(<span class="keyword">true</span>, <span class="number">50</span>, <span class="number">200</span>);</div><div class="line"></div><div class="line"><span class="comment">// 设置下拉圆圈的大小，两个值 LARGE， DEFAULT</span></div><div class="line">mySwipeRefreshLayout.setSize(SwipeRefreshLayout.LARGE);</div><div class="line"></div><div class="line"><span class="comment">// 设置下拉圆圈上的颜色，蓝色、绿色、橙色、红色</span></div><div class="line">mySwipeRefreshLayout.setColorSchemeResources(</div><div class="line">        android.R.<span class="built_in">color</span>.holo_blue_bright,</div><div class="line">        android.R.<span class="built_in">color</span>.holo_green_light,</div><div class="line">        android.R.<span class="built_in">color</span>.holo_orange_light,</div><div class="line">        android.R.<span class="built_in">color</span>.holo_red_light);</div><div class="line"></div><div class="line"><span class="comment">// 通过 setEnabled(false) 禁用下拉刷新</span></div><div class="line">mySwipeRefreshLayout.setEnabled(<span class="keyword">false</span>);</div><div class="line"></div><div class="line"><span class="comment">// 设定下拉圆圈的背景</span></div><div class="line">mSwipeLayout.setProgressBackgroundColor(R.<span class="built_in">color</span>.<span class="built_in">red</span>);</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 设置手势下拉刷新的监听</div><div class="line"> */</div><div class="line">mySwipeRefreshLayout.setOnRefreshListener(</div><div class="line">        <span class="keyword">new</span> SwipeRefreshLayout.OnRefreshListener() &#123;</div><div class="line">            @Override</div><div class="line">            <span class="keyword">public</span> <span class="keyword">void</span> onRefresh() &#123;</div><div class="line">                <span class="comment">// 刷新动画开始后回调到此方法</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">);</div></pre></td></tr></table></figure></p>
+<ol>
+<li>使用第三方下拉刷新控件，可以更好地支持自定义下拉样式。<br>这里推荐一个比较好的第三方控件：<a href="https://github.com/liaohuqiu/android-Ultra-Pull-To-Refresh" target="_blank" rel="external">android-Ultra-Pull-To-Refresh</a><figure class="highlight maxima"><table><tr><td class="code"><pre><div class="line"><span class="built_in">compile</span> '<span class="keyword">in</span>.srain.<span class="built_in">cube</span>:ultra-ptr:<span class="number">1.0</span>.10'</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>xml中控件初始化：<br><figure class="highlight stylus"><table><tr><td class="code"><pre><div class="line">&lt;<span class="keyword">in</span><span class="selector-class">.srain</span><span class="selector-class">.cube</span><span class="selector-class">.views</span><span class="selector-class">.ptr</span><span class="selector-class">.PtrFrameLayout</span></div><div class="line">    xmlns:app=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    android:id=<span class="string">"@+id/refreshView"</span></div><div class="line">    android:layout_width=<span class="string">"match_parent"</span></div><div class="line">    android:layout_height=<span class="string">"match_parent"</span></div><div class="line">    app:ptr_duration_to_close=<span class="string">"200"</span></div><div class="line">    app:ptr_duration_to_close_header=<span class="string">"1000"</span></div><div class="line">    app:ptr_keep_header_when_refresh=<span class="string">"true"</span></div><div class="line">    app:ptr_pull_to_fresh=<span class="string">"false"</span></div><div class="line">    app:ptr_ratio_of_header_height_to_refresh=<span class="string">"1.2"</span></div><div class="line">    app:ptr_resistance=<span class="string">"1.7"</span>&gt;</div><div class="line"></div><div class="line">    &lt;com<span class="selector-class">.zdf</span><span class="selector-class">.zhihu</span><span class="selector-class">.view</span><span class="selector-class">.widget</span><span class="selector-class">.LoadMoreRecyclerView</span></div><div class="line">        android:id=<span class="string">"@+id/recyclerView"</span></div><div class="line">        android:layout_width=<span class="string">"match_parent"</span></div><div class="line">        android:layout_height=<span class="string">"wrap_content"</span>&gt;</div><div class="line"></div><div class="line">    &lt;/com<span class="selector-class">.zdf</span><span class="selector-class">.zhihu</span><span class="selector-class">.view</span><span class="selector-class">.widget</span><span class="selector-class">.LoadMoreRecyclerView</span>&gt;</div><div class="line"></div><div class="line">&lt;/<span class="keyword">in</span><span class="selector-class">.srain</span><span class="selector-class">.cube</span><span class="selector-class">.views</span><span class="selector-class">.ptr</span><span class="selector-class">.PtrFrameLayout</span>&gt;</div></pre></td></tr></table></figure></p>
+<p>java类中实现：<br><figure class="highlight aspectj"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initRefreshView</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="comment">// 这里可以完全自定义各种样式，只要实现PtrUIHandler，</span></div><div class="line">    <span class="comment">// 具体请参考官方文档也源码</span></div><div class="line">    MaterialHeader header = <span class="keyword">new</span> MaterialHeader(getContext());</div><div class="line">    refreshView.setHeaderView(header);</div><div class="line">    refreshView.addPtrUIHandler(header);</div><div class="line">    refreshView.setPtrHandler(<span class="keyword">new</span> PtrDefaultHandler() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onRefreshBegin</span><span class="params">(PtrFrameLayout ptrFrameLayout)</span> </span>&#123;</div><div class="line">            page = <span class="number">0</span>;</div><div class="line">            requestTopMovies();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">autoRefresh</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">handler</span>.postDelayed(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            refreshView.autoRefresh();</div><div class="line">        &#125;</div><div class="line">    &#125;, <span class="number">100</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">refreshComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">handler</span>.post(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">            refreshView.refreshComplete();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h4 id="上拉加载更多"><a href="#上拉加载更多" class="headerlink" title="上拉加载更多"></a>上拉加载更多</h4><p>以列表控件的一部分扩展实现，这里以RecyclerView为例，新建一个类LoadMoreRecyclerView，继承至RecyclerView，主要的功能就是实现加载更多逻辑和显示控件：<br><figure class="highlight java"><table><tr><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 集成了上拉加载更多的RecyclerView</div><div class="line"> *</div><div class="line"> * Created by XiaoFeng on 2017/2/3.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadMoreRecyclerView</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_NONE = <span class="number">0x00</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_LOADING = <span class="number">0x01</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_FAILURE = <span class="number">0x02</span>;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_COMPLETE = <span class="number">0x03</span>;</div><div class="line"></div><div class="line">    <span class="comment">// 滑到底部里最后一个个数的阀值</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> VISIBLE_THRESHOLD = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> state;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> loadMoreEnabled = <span class="keyword">true</span>;</div><div class="line">    <span class="keyword">private</span> OnLoadMoreListener listener;</div><div class="line">    <span class="keyword">private</span> SuperAdapter superAdapter;</div><div class="line">    <span class="keyword">private</span> LoadMoreView loadMoreView;</div><div class="line">    <span class="keyword">private</span> LinearLayoutManager layoutManager;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoadMoreRecyclerView</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoadMoreRecyclerView</span><span class="params">(Context context, @Nullable AttributeSet attrs)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(context, attrs, <span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoadMoreRecyclerView</span><span class="params">(Context context, @Nullable AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, attrs, defStyle);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initLoadMore</span><span class="params">(@NonNull OnLoadMoreListener listener)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.listener = listener;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (getAdapter() <span class="keyword">instanceof</span> SuperAdapter) &#123;</div><div class="line">            superAdapter = (SuperAdapter) getAdapter();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        loadMoreView = <span class="keyword">new</span> LoadMoreView(getContext());</div><div class="line">        layoutManager = (LinearLayoutManager) getLayoutManager();</div><div class="line"></div><div class="line">        addOnScrollListener(<span class="keyword">new</span> OnScrollListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollStateChanged</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> newState)</span> </span>&#123;</div><div class="line">                <span class="keyword">super</span>.onScrollStateChanged(recyclerView, newState);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrolled</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy)</span> </span>&#123;</div><div class="line">                <span class="keyword">super</span>.onScrolled(recyclerView, dx, dy);</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (canLoadMore() &amp;&amp; dy &gt;= <span class="number">0</span>) &#123;</div><div class="line">                    <span class="keyword">int</span> totalItemCount = layoutManager.getItemCount();</div><div class="line">                    <span class="keyword">int</span> lastVisibleItem = layoutManager.findLastVisibleItemPosition();</div><div class="line">                    <span class="keyword">if</span> (lastVisibleItem + VISIBLE_THRESHOLD &gt;= totalItemCount) &#123;</div><div class="line">                        onLoadMore(recyclerView);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLoadMoreEnabled</span><span class="params">(<span class="keyword">boolean</span> enabled)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.loadMoreEnabled = enabled;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">canLoadMore</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> state != STATE_LOADING &amp;&amp; loadMoreEnabled;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">onLoadMore</span><span class="params">(RecyclerView recyclerView)</span> </span>&#123;</div><div class="line">        state = STATE_LOADING;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (loadMoreView != <span class="keyword">null</span>) &#123;</div><div class="line">            loadMoreView.loading();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        recyclerView.post(<span class="keyword">new</span> Runnable() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">if</span> (state == STATE_LOADING) &#123;</div><div class="line">                    <span class="keyword">if</span> (superAdapter != <span class="keyword">null</span> &amp;&amp; loadMoreView != <span class="keyword">null</span>) &#123;</div><div class="line">                        superAdapter.addFooterView(loadMoreView);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (listener != <span class="keyword">null</span>) &#123;</div><div class="line">            listener.onLoadMore();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadMoreFailed</span><span class="params">()</span> </span>&#123;</div><div class="line">        state = STATE_FAILURE;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (loadMoreView != <span class="keyword">null</span>) &#123;</div><div class="line">            loadMoreView.failure();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (superAdapter != <span class="keyword">null</span>) &#123;</div><div class="line">            superAdapter.removeFooterView();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">loadMoreComplete</span><span class="params">()</span> </span>&#123;</div><div class="line">        state = STATE_COMPLETE;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (loadMoreView != <span class="keyword">null</span>) &#123;</div><div class="line">            loadMoreView.complete();</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (superAdapter != <span class="keyword">null</span>) &#123;</div><div class="line">            superAdapter.removeFooterView();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>上面出现的SuperAdapter是使用了一个第三方封装的<strong><a href="https://github.com/byteam/SuperAdapter" target="_blank" rel="external">万能Adapter</a></strong>，同时支持ListView和RecyclerView，个人感觉比<a href="https://github.com/hongyangAndroid/baseAdapter" target="_blank" rel="external">鸿洋大神封装的万能Adapter</a>要好一些，但是基本原理都是一样的。原理可以看他们各自的文章介绍，已经写的很详细了，这里就不多说了。</p>
+<blockquote>
+<p><a href="http://www.jianshu.com/p/d6a76fd3ea5b" target="_blank" rel="external">http://www.jianshu.com/p/d6a76fd3ea5b</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/38902805" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/38902805</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/51118836" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/51118836</a></p>
+</blockquote>
+<h4 id="关于分页加载"><a href="#关于分页加载" class="headerlink" title="关于分页加载"></a>关于分页加载</h4><p>伴随着<strong>上拉加载更多</strong>功能的，往往是<strong>分页加载</strong>，关于分页加载的页数是在列表控件内部自动控制？还是在列表控件外部自己控制？我个人认为应该放在列表控件外部自己来控制页数，因为这个页数不光是在上拉加载更多时会使用到，在下拉刷新的时候也会使用到，并且对页数需要清零。<br>这里提供一种在列表控件外部控制页数的实现逻辑：<br><figure class="highlight aspectj"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 分页页数</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> page = <span class="number">0</span>;</div><div class="line"></div><div class="line"><span class="comment">// 初始化下拉刷新控件</span></div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initRefreshView</span><span class="params">()</span> </span>&#123;</div><div class="line">    MaterialHeader header = <span class="keyword">new</span> MaterialHeader(getContext());</div><div class="line">    refreshView.setHeaderView(header);</div><div class="line">    refreshView.addPtrUIHandler(header);</div><div class="line">    refreshView.setPtrHandler(<span class="keyword">new</span> PtrDefaultHandler() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onRefreshBegin</span><span class="params">(PtrFrameLayout ptrFrameLayout)</span> </span>&#123;</div><div class="line">            page = <span class="number">0</span>;</div><div class="line">            requestTopMovies();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 初始化RecyclerView，包含上拉加载更多</span></div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initRecyclerView</span><span class="params">()</span> </span>&#123;</div><div class="line">    recyclerView.setLayoutManager(<span class="keyword">new</span> LinearLayoutManager(getContext()));</div><div class="line">    adapter = <span class="keyword">new</span> SubjectAdapter(getContext());</div><div class="line">    recyclerView.setAdapter(adapter);</div><div class="line">    recyclerView.initLoadMore(<span class="keyword">new</span> OnLoadMoreListener() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onLoadMore</span><span class="params">()</span> </span>&#123;</div><div class="line">            page++;</div><div class="line">            requestTopMovies();</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 具有分页操作的网络请求</span></div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">requestTopMovies</span><span class="params">()</span> </span>&#123;</div><div class="line">    Subscriber subscriber = <span class="keyword">new</span> RxCallback&lt;List&lt;Movie&gt;&gt;() &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(List&lt;Movie&gt; movieList)</span> </span>&#123;</div><div class="line">            <span class="keyword">if</span> (adapter != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">if</span> (page == <span class="number">0</span>) &#123;</div><div class="line">                    adapter.clear();</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    recyclerView.loadMoreComplete();</div><div class="line">                &#125;</div><div class="line">                adapter.addAll(movieList);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onFinished</span><span class="params">()</span> </span>&#123;</div><div class="line">            refreshComplete();</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    RxRetrofitClient.getInstance().requestTop250Movies(subscriber, page, <span class="number">10</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>参考:<br><a href="https://github.com/hanks-zyh/SwipeRefreshLayout" target="_blank" rel="external">https://github.com/hanks-zyh/SwipeRefreshLayout</a><br><a href="http://www.jianshu.com/p/d6a76fd3ea5b" target="_blank" rel="external">http://www.jianshu.com/p/d6a76fd3ea5b</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/38902805" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/38902805</a><br><a href="http://blog.csdn.net/lmj623565791/article/details/51118836" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/51118836</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/01/26/RxJava-Retrofit2-OkHttp3封装及踩坑-续/" rel="next" title="RxJava + Retrofit2 + OkHttp3 封装及踩坑（续）">
+                <i class="fa fa-chevron-left"></i> RxJava + Retrofit2 + OkHttp3 封装及踩坑（续）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="XiaoFeng" />
+          <p class="site-author-name" itemprop="name">XiaoFeng</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+        
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">Artikel</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#下拉刷新"><span class="nav-number">1.</span> <span class="nav-text">下拉刷新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上拉加载更多"><span class="nav-number">2.</span> <span class="nav-text">上拉加载更多</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#关于分页加载"><span class="nav-number">3.</span> <span class="nav-text">关于分页加载</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XiaoFeng</span>
+</div>
+
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid="></script>
+      <!-- UY END -->
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
